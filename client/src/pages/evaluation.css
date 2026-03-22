@@ -1,0 +1,101 @@
+.evaluation {
+  min-height: 90vh;
+  background: #020617;
+  color: white;
+  padding: 60px 0;
+}
+
+.evaluation h1 {
+  text-align: center;
+  font-size: 36px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #cbd5f5;
+  margin: 15px auto 40px;
+  max-width: 700px;
+}
+
+/* Cards */
+.eval-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.eval-card {
+  background: #0f172a;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.eval-card h3 {
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+.eval-card p {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.ai-score {
+  color: #22c55e;
+}
+
+/* Table */
+.table-box {
+  background: #0f172a;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.table-box h2 {
+  margin-bottom: 15px;
+  color: #38bdf8;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 12px;
+  border-bottom: 1px solid #1e293b;
+  text-align: center;
+}
+
+table th {
+  background: #020617;
+  color: #38bdf8;
+}
+
+/* AI Insight */
+.ai-insight {
+  margin-top: 30px;
+  background: #020617;
+  padding: 20px;
+  border-left: 5px solid #22c55e;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .eval-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .evaluation h1 {
+    font-size: 26px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+}

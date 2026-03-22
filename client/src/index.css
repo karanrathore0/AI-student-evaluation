@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+/* Header */
+.header {
+  background: #020617;
+  padding: 15px 0;
+}
+
+.header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: #38bdf8;
+  font-size: 24px;
+}
+
+.logo span {
+  color: #22c55e;
+}
+
+.nav a {
+  color: #fff;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.btn-login {
+  background: #38bdf8;
+  padding: 8px 14px;
+  border-radius: 5px;
+  color: #020617;
+}
+
+/* Footer */
+.footer {
+  background: #020617;
+  color: #cbd5f5;
+  padding: 40px 0 10px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.footer h3,
+.footer h4 {
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+.footer ul {
+  list-style: none;
+}
+
+.footer ul li {
+  margin-bottom: 6px;
+}
+
+copyright {
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-wrap {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+.home {
+  min-height: 90vh;
+  background: linear-gradient(to right, #020617, #0f172a);
+  color: white;
+  text-align: center;
+  padding: 80px 0;
+}
+
+.home h1 {
+  font-size: 40px;
+}
+
+.home h1 span {
+  color: #38bdf8;
+}
+
+.subtitle {
+  margin: 20px auto;
+  max-width: 700px;
+  color: #cbd5f5;
+  font-size: 18px;
+}
+
+.home-actions {
+  margin: 30px 0;
+}
+
+.btn-primary {
+  background: #22c55e;
+  border: none;
+  padding: 12px 25px;
+  margin-right: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+  padding: 12px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 60px;
+}
+
+.card {
+  background: #020617;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.card h3 {
+  margin: 15px 0;
+  color: #38bdf8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .home h1 {
+    font-size: 26px;
+  }
+
+  .home-cards {
+    grid-template-columns: 1fr;
+  }
+}
