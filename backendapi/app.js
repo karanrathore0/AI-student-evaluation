@@ -3,11 +3,15 @@ const app = express()
 const port = 3000
 const web = require('./routes/web')
 const connectDB = require('./database/connectDB')
-
+const cookieParser = require('cookie-parser')
+//token ko get karne ke liye
 
 
 //connect DB
 connectDB()
+
+//cookie parser
+app.use(cookieParser())
 
 //data get json
 //data ko get karne kae liye postman se ya react se

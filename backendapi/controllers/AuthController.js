@@ -83,22 +83,31 @@ class AuthController {
 
             //generate jwt token
             const token = jwt.sign(
-                { id: userExist._id , role:userExist.role }, 
+                { id: userExist._id, role: userExist.role },
                 "karanrathore", { expiresIn: "1h" })    // 1h 1 hour ke liye 
-                // "karanrathore"  secret key hai 
+            // "karanrathore"  secret key hai 
 
-                res.status(200).json({
-                    message:"login success",
-                    token,
-                    user:{
-                        id:userExist._id,
-                        name:userExist.name,
-                        email:userExist.email,
-                        role:userExist.role
-                    }
-                    //token id dega 
-                    // aur baki sari detail 
-                })
+          //cookie me token store karne ke liye
+            res.cookie("token", token, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "lax",
+            })
+
+
+
+            res.status(200).json({
+                message: "login success",
+                token,
+                user: {
+                    id: userExist._id,
+                    name: userExist.name,
+                    email: userExist.email,
+                    role: userExist.role
+                }
+                //token id dega 
+                // aur baki sari detail 
+            })
 
 
         } catch (error) {
