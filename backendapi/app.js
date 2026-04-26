@@ -5,6 +5,19 @@ const web = require('./routes/web')
 const connectDB = require('./database/connectDB')
 const cookieParser = require('cookie-parser')
 //token ko get karne ke liye
+const cors = require('cors')
+
+
+//cors   iske bina frontend ko connect nhinkar sakte
+//backend api ko frontend se connect karne ke liye
+//backend se data frontend me lane ke liye
+app.use(
+  cors({
+    origin: "http://localhost:5173",  //react ka port
+    credentials: true,
+  })
+)
+
 
 
 //connect DB
