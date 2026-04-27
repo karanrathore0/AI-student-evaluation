@@ -1,0 +1,51 @@
+Project Introduction: AI Student Evaluation
+
+1. Project Overview
+The AI Student Evaluation system is a full-stack web application built to modernize how student performance is tracked and evaluated. Moving beyond traditional grading systems, this application provides actionable insights and personalized recommendations to help students actively improve their academic performance.
+
+The platform serves as an interactive bridge between educators and learners:
+• For Teachers: It provides a streamlined interface to input student marks, manage academic records, and monitor overall class performance in one place.
+• For Students: It offers a secure, personalized dashboard where they can access their results alongside automated feedback tailored to their specific strengths and weaknesses.
+
+2. Core Objectives
+• To digitize and streamline the evaluation tracking process, eliminating manual paperwork.
+• To empower students by highlighting their academic strengths and identifying areas needing improvement through automated insights.
+• To ensure a secure, role-based ecosystem where students only have access to their personal data, while teachers maintain comprehensive control over their respective class records.
+
+3. Key Features & Functionality
+• Role-Based Access Control (RBAC): Distinct authentication portals and dashboard interfaces tailored specifically for 'Teachers' and 'Students'.
+• Teacher Dashboard: A dedicated workspace enabling educators to seamlessly add new student marks, update existing records, and view a consolidated list of all student performances.
+• Student Dashboard: A personalized analytics view where students can track their individual progress over time.
+• Automated Evaluation & Recommendations: Based on the entered marks, the system processes the data to generate custom recommendations, guiding students on how to improve in specific subjects.
+• Secure Authentication: Robust security measures utilizing JSON Web Tokens (JWT) for session management and bcrypt for password hashing.
+
+4. System Workflow
+1. Registration & Authentication: Users create accounts with designated roles (Teacher/Student) and log in securely.
+2. Data Entry (Teacher): Authenticated teachers navigate to their dashboard to input or update marks across various subjects for specific students.
+3. Viewing & Feedback (Student): Students log into their accounts to view their detailed evaluations, which include their scores and system-generated tips for academic improvement.
+
+5. Technology Stack
+• Frontend: React.js, Vite, HTML/CSS
+• Backend: Node.js, Express.js
+• Database: MongoDB (managed via Mongoose ODM)
+• Security: bcrypt (Password Hashing), JSON Web Tokens (JWT)
+
+6. Code Sample (Backend Routing)
+Here is a small snippet demonstrating how the backend ensures that only authenticated users with the correct role can access certain endpoints:
+
+const express = require('express');
+const router = express.Router();
+const { verifyToken, checkRole } = require('../middlewares/auth');
+const { getStudentEvaluations } = require('../controllers/evaluationController');
+
+// Only authenticated students can view their own evaluations
+router.get('/my-evaluations', verifyToken, checkRole('Student'), getStudentEvaluations);
+
+// Only authenticated teachers can add marks
+router.post('/add-marks', verifyToken, checkRole('Teacher'), addMarksController);
+
+module.exports = router;
+
+
+7. Conclusion
+The AI Student Evaluation project is a comprehensive educational tool that solves real-world academic tracking challenges. By integrating automated recommendations with distinct, role-tailored views, the application not only reduces the administrative burden on educators but also actively guides students toward sustained academic success.

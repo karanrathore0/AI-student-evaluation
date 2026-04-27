@@ -1,0 +1,68 @@
+PROJECT SYNOPSIS
+
+Project Title: AI Student Evaluation System
+
+1. INTRODUCTION
+In the current educational landscape, continuous monitoring of a student's academic progress is vital. The "AI Student Evaluation System" is a comprehensive, web-based application designed specifically for schools, coaching centers, and educational institutes. It acts as a transparent digital bridge connecting teachers, students, and parents. Unlike traditional grading systems, this platform not only records marks and attendance but also provides actionable, automated feedback to help students improve in their weak areas. By empowering parents with real-time data, the system fosters a collaborative environment that guides students toward sustained academic success.
+
+2. FUNDAMENTALS AND LITERATURE SURVEY
+The evaluation of student progress has traditionally been a manual process involving report cards, Excel sheets, and periodic Parent-Teacher Meetings (PTMs). In recent years, educational institutes have adopted digital solutions such as traditional School Management Systems (ERPs) and Parent Communication Apps (WhatsApp, SMS). However, several critical gaps remain:
+• Lack of Actionable Insights: Existing systems merely present raw data (e.g., 60/100). They do not analyze this data to tell parents exactly which subject their child is struggling with.
+• Disconnected Metrics: Attendance and academic marks are often treated as separate entities, making it difficult to correlate poor attendance with dropping grades.
+• Poor Parent-Centric Focus: Existing ERPs are built for school administrators (focusing on fees, payroll), not for parents. Parents require a simplified dashboard that highlights their child’s progress at a glance.
+
+3. PROBLEM STATEMENT
+Currently, there is a distinct lack of a dedicated, user-friendly platform that allows parents to easily track their child’s real-time attendance and academic performance. Existing systems are overly complex, fragmented, and strictly historical—they look at the past but do not provide automated recommendations for improvement. This leaves parents disconnected from the actual root causes of poor academic performance until it is too late.
+
+4. PROJECT DESCRIPTION
+The AI Student Evaluation System is a full-stack web application that uses a Role-Based Access Control (RBAC) mechanism to provide distinct functionalities for Teachers and Students/Parents. 
+
+Objectives:
+• To design a centralized platform for teachers to easily record and manage student attendance and subject-wise marks.
+• To create a dedicated Parent/Student Dashboard for real-time monitoring of academic progress.
+• To implement an automated evaluation engine that analyzes raw marks and generates personalized feedback.
+
+Modules of the System:
+• Authentication Module: Secure login and registration using JWT and password hashing.
+• Teacher Module: Interface for educators to add, view, and update student marks and attendance records securely.
+• Student/Parent Module: A personalized dashboard displaying the individual student's performance metrics and attendance history.
+• Evaluation Module: The core logic engine that analyzes the entered marks and outputs actionable recommendations.
+
+5. RESULT ANALYSIS
+Upon entering the marks and attendance by the teachers, the system instantly processes the information to generate a comprehensive evaluation report for the student. The result analysis module identifies subjects where the student is underperforming and outputs targeted recommendations. Parents can view this analysis in real-time, allowing them to instantly gauge whether their child needs extra attention in a specific subject, thereby shifting the evaluation paradigm from reactive to proactive.
+
+6. CONCLUSION AND FUTURE WORK
+Conclusion:
+The AI Student Evaluation System transforms traditional academic tracking into a dynamic, analytical, and highly transparent process. By bridging the communication gap between the institute and parents, the project actively guides students toward academic improvement.
+
+Future Work:
+While the current system utilizes automated logic for recommendations, the future scope involves the integration of advanced Machine Learning (ML) algorithms. By training an ML model on historical data (attendance vs. marks), the system will perform Predictive Analytics. It will predict a student's future exam scores and proactively alert parents if a student's current trajectory indicates a potential failure, empowering parents to take corrective action early.
+
+7. REFERENCE
+[1] React Documentation. (n.d.). Retrieved from https://react.dev/
+[2] Node.js Official Documentation. (n.d.). Retrieved from https://nodejs.org/en/docs/
+[3] Mongoose ODM v6.x Documentation. (n.d.). Retrieved from https://mongoosejs.com/
+[4] JSON Web Token Introduction. (n.d.). Retrieved from https://jwt.io/introduction
+
+8. SOFTWARE AND HARDWARE REQUIREMENTS
+Software Requirements:
+• Frontend: React.js, Vite, HTML5, CSS3
+• Backend: Node.js, Express.js
+• Database: MongoDB (via Mongoose ODM)
+• Tools: VS Code, Postman, Git
+
+Hardware Requirements (Minimum):
+• Processor: Intel Core i3 or equivalent
+• RAM: 4 GB
+• Storage: 256 GB HDD/SSD
+• Internet Connection for cloud database access.
+
+9. APPENDIX : LIST OF ABBREVIATION
+• ML: Machine Learning
+• RBAC: Role-Based Access Control
+• JWT: JSON Web Token
+• API: Application Programming Interface
+• UI: User Interface
+• ERP: Enterprise Resource Planning
+• PTM: Parent-Teacher Meeting
+• ODM: Object Data Modeling
