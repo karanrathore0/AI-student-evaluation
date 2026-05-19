@@ -1,0 +1,199 @@
+AI Student Evaluation System - Proposed System Design
+
+This document contains the proposed system designs, including Block Diagrams, Flowcharts, Data Flow Diagrams (DFD), Entity-Relationship (ER) diagrams, and the core Evaluation Algorithm.
+
+--------------------------------------------------
+
+1. Block Diagram (System Architecture)
+
+The block diagram illustrates the high-level architecture of the application, utilizing the MERN stack (MongoDB, Express, React, Node.js) along with the core evaluation logic.
+
+                          +-------------------------+
+                          |   Frontend (React.js)   |
+                          |                         |
+                          |  +---+   +----------+   |
+                          |  |UI |   |Dashboard |   |
+                          |  +---+   +----------+   |
+                          +-----------+-------------+
+                                      | (API Calls)
+                                      v
++-------------------------------------------------------------------------+
+|                       Backend (Node.js & Express)                       |
+|                                                                         |
+|  +--------------+    +------------------+    +-----------------------+  |
+|  | Auth Router  |    | Student Router   |    | Teacher Router        |  |
+|  +-------+------+    +--------+---------+    +-----------+-----------+  |
+|          |                    |                          |              |
+|          v                    v                          v              |
+|  +--------------+    +------------------+    +-----------------------+  |
+|  |Auth Controlr |    | Student Controlr |    | Teacher Controller    |  |
+|  +-------+------+    +--------+---------+    +-----------+-----------+  |
+|          |                    |                          |              |
+|          |                    |                          v              |
+|          |                    |              +-----------------------+  |
+|          |                    |              |    Evaluation Logic   |  |
+|          |                    |              +-----------+-----------+  |
++----------+--------------------+--------------------------+--------------+
+           |                    |                          |
+           v                    v                          v
++-------------------------------------------------------------------------+
+|                        Database (MongoDB)                               |
+|                                                                         |
+|         +----------------+                 +----------------+           |
+|         | Users Collection|                 | Results Col.   |           |
+|         +----------------+                 +----------------+           |
++-------------------------------------------------------------------------+
+
+--------------------------------------------------
+
+2. Flowcharts
+
+2.1 User Authentication Flow
+This flowchart describes the login and registration process for both Students and Teachers.
+
+flowchart TD
+    Start([Start]) --> OpenApp[Open Application]
+    OpenApp --> HasAccount{Has Account?}
+    HasAccount -- No --> Register[Registration Page]
+    Register --> SelectRole[Select Role: Student/Teacher]
+    SelectRole --> InputDetails[Input Details]
+    InputDetails --> SaveDB[(Save to Database)]
+    SaveDB --> Login
+    
+    HasAccount -- Yes --> Login[Login Page]
+    Login --> EnterCreds[Enter Credentials]
+    EnterCreds --> Verify{Verify in DB}
+    Verify -- Invalid --> LoginError[Show Error]
+    Verify -- Valid --> CheckRole{Check Role}
+    
+    CheckRole -- Teacher --> TeacherDash[Redirect to Teacher Dashboard]
+    CheckRole -- Student --> StudentDash[Redirect to Student Dashboard]
+
+
+2.2 Teacher Evaluation Flow
+Describes how a teacher evaluates a student by entering marks, which the system processes to generate a grade.
+
+flowchart TD
+    Start([Teacher Logged In]) --> ViewStudents[View All Students]
+    ViewStudents --> SelectStudent[Select Student]
+    SelectStudent --> AddMarks[Enter Marks for Subject]
+    AddMarks --> Submit[Submit Data]
+    Submit --> EvalLogic[System Evaluates Performance]
+    EvalLogic --> CalcGrade[Calculate Grade]
+    CalcGrade --> SaveResult[(Save Result to Database)]
+    SaveResult --> ShowSuccess[Display Success Message]
+    ShowSuccess --> End([End])
+
+
+2.3 Student Dashboard Flow
+Describes the student's perspective when they log in to view their performance.
+
+flowchart TD
+    Start([Student Logged In]) --> FetchResults[Fetch Results from DB]
+    FetchResults --> HasResults{Results Found?}
+    HasResults -- No --> ShowEmpty[Display "No Results Found"]
+    HasResults -- Yes --> CalcAnalytics[Calculate Overall Analytics]
+    CalcAnalytics --> DisplayMarks[Display Subject Marks & Grades]
+    DisplayMarks --> DisplayRecs[Display Performance Recommendations]
+    DisplayRecs --> End([End])
+
+--------------------------------------------------
+
+3. Data Flow Diagram (DFD)
+
+3.1 Level 0 DFD (Context Diagram)
+The Context Diagram shows the system as a single high-level process interacting with external entities (Teacher and Student).
+
+flowchart LR
+    Teacher([Teacher]) -- "Student Details, Marks, Subjects" --> System((AI Student Evaluation System))
+    Student([Student]) -- "Login Credentials" --> System
+    System -- "Grades, Performance Insights, Recommendations" --> Student
+    System -- "Evaluation Status/Success" --> Teacher
+
+
+3.2 Level 1 DFD
+The Level 1 DFD breaks down the main system into detailed sub-processes.
+
+flowchart TD
+    Teacher([Teacher])
+    Student([Student])
+    
+    P1((1.0 Authentication))
+    P2((2.0 Marks Management))
+    P3((3.0 Evaluation Logic))
+    P4((4.0 Report Generation))
+    
+    D1[(D1: User Database)]
+    D2[(D2: Result Database)]
+    
+    Teacher -- Credentials --> P1
+    Student -- Credentials --> P1
+    P1 -- Read/Write --> D1
+    
+    Teacher -- Input Marks & Subject --> P2
+    P2 -- Write Raw Data --> D2
+    
+    D2 -- Raw Marks --> P3
+    P3 -- Calculated Grades --> D2
+    
+    Student -- Request Dashboard Data --> P4
+    D2 -- Processed Results --> P4
+    P4 -- Display Recommendations & Dashboard --> Student
+
+--------------------------------------------------
+
+4. Entity-Relationship (ER) Diagram
+
+Based on the actual MongoDB schemas created for the project (user.js and result.js).
+
++-------------------+                          +-------------------+
+|       USER        |                          |      RESULT       |
++-------------------+                          +-------------------+
+| PK  _id           |                          | PK  _id           |
+|     name          | 1                      M | FK  student       |
+|     email         +--------------------------+     subject       |
+|     password      |        Has/Evaluates     |     marks         |
+|     role          |                          |     grade         |
+|     createdAt     |                          |     createdAt     |
+|     updatedAt     |                          |     updatedAt     |
++-------------------+                          +-------------------+
+
+--------------------------------------------------
+
+5. Algorithm / Pseudocode
+
+Algorithm: Student Evaluation and Grading Logic
+
+Input: 'subject' name and 'marks' out of 100 for a specific student.
+Output: Computed 'grade' and dynamically generated AI recommendations.
+
+1. START
+2. RECEIVE student_id, subject, marks from Teacher Input
+3. IF marks < 0 OR marks > 100 THEN
+      RETURN Error "Invalid marks entered"
+   END IF
+4. COMPUTE Grade based on marks:
+      IF marks >= 90 THEN 
+         grade = "A+"
+      ELSE IF marks >= 80 THEN 
+         grade = "A"
+      ELSE IF marks >= 70 THEN 
+         grade = "B"
+      ELSE IF marks >= 60 THEN 
+         grade = "C"
+      ELSE IF marks >= 40 THEN 
+         grade = "D"
+      ELSE 
+         grade = "F" (Fail)
+      END IF
+5. GENERATE Recommendations based on grade:
+      IF grade == "A+" OR grade == "A" THEN
+         recommendation = "Excellent performance. Focus on advanced topics."
+      ELSE IF grade == "B" OR grade == "C" THEN
+         recommendation = "Good, but needs more practice in core concepts."
+      ELSE
+         recommendation = "Needs immediate attention and remedial classes."
+      END IF
+6. SAVE new Result object { student: student_id, subject, marks, grade } into Database
+7. RETURN Success Message
+8. END

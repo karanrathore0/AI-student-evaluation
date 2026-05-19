@@ -1,0 +1,45 @@
+Hello Gemini, 
+
+I am building an "AI Student Evaluation System" for my project. I need you to generate System Design Diagrams (Block Diagram, ER Diagram, Flowcharts, and DFDs) for my project report.
+
+Here is the complete context, features, and database schemas of my project to help you generate accurate diagrams:
+
+### 1. PROJECT OVERVIEW
+- Tech Stack: MERN stack (MongoDB, Express, React, Node.js).
+- Roles: Students and Teachers.
+- Teacher Functionality: Register/Login, view all students, add subject marks (out of 100) for a student, and trigger evaluation.
+- Evaluation Logic: The backend system evaluates the marks, calculates a grade (A+, A, B, C, D, F), and generates actionable AI-like recommendations based on the student's performance.
+- Student Functionality: Register/Login, view their own evaluated marks, grades, and the system's recommendations.
+
+### 2. DATABASE SCHEMAS (MongoDB)
+
+User Schema:
+- _id: ObjectId
+- name: String
+- email: String
+- password: String
+- role: String (Enum: "student", "teacher")
+- timestamps: true
+
+Result Schema:
+- _id: ObjectId
+- student: ObjectId (Foreign Key -> Reference to User Schema)
+- subject: String
+- marks: Number
+- grade: String
+- timestamps: true
+
+### 3. WHAT I NEED FROM YOU
+Based on the above context, please generate the following for my project report:
+1. A System Architecture Block Diagram.
+2. An Entity-Relationship (ER) Diagram based on the exact schemas provided.
+3. Flowcharts for:
+   a. User Registration/Login flow.
+   b. Teacher Evaluation flow (from selecting a student to saving results).
+   c. Student Dashboard flow.
+4. Data Flow Diagrams (DFD):
+   a. Level 0 DFD (Context Diagram).
+   b. Level 1 DFD.
+5. The Pseudocode/Algorithm for the Marks Evaluation and Grading Logic.
+
+Note: Please provide these diagrams in clear Mermaid.js code blocks (so I can render them on mermaid.live) and also provide simple ASCII text diagram versions for the Block Diagram and ER Diagram so I can directly paste them into MS Word.
